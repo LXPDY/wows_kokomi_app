@@ -1,0 +1,6 @@
+package com.example.wows_kokomi_app
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
