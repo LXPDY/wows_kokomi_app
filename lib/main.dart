@@ -1,5 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:wows_kokomi_app/common/KkmHttpTool.dart';
+import 'package:wows_kokomi_app/models/TestModel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,38 +51,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-    bool _loading = false;
-  String _text = "";
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  final int _counter = 0;
+  bool _loading = false;
+  String? _text = "";
+  final KkmHttpTool _httpTool = KkmHttpTool();
+  Future<TestModel>? model;
 
-void request() async {
-  setState(() {
-    _loading = true;
+   getModle() async {
+      setState(() {
+      _loading = true;
     _text = "正在请求...";
-  });
-  try {
-    // 发送GET请求
-    final response = await http.get(Uri.parse("http://www.wows-coral.com:443/user/info/?token=kokomi2%2F22&aid=2027994108&server=asia&use_ac=false"));
-    // 读取响应内容
-    _text = response.body;
-  } catch (e) {
-    _text = "请求失败：$e";
-  } finally {
-    setState(() {
-      _loading = false;
     });
+    model =_httpTool.httpGet();
+    model!.then((textModel){
+    setState(()  {
+        _text = textModel.text;
+              _loading = false;
+    });
+    });
+
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -94,12 +84,12 @@ void request() async {
       child: Column(
         children: <Widget>[
           ElevatedButton(
-            child: Text("测试"),
-            onPressed: _loading ? null : request,
+            child: const Text("测试"),
+            onPressed: _loading ? null : getModle,
           ),
           Container(
             width: MediaQuery.of(context).size.width - 50.0,
-            child: Text(_text.replaceAll(RegExp(r"\s"), "")),
+            child: Text(_text!.replaceAll(RegExp(r"\s"), "")),
           )
         ],
       ),
