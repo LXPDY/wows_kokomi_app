@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -96,7 +94,7 @@ void request() async {
       child: Column(
         children: <Widget>[
           ElevatedButton(
-            child: Text("获取百度首页"),
+            child: Text("测试"),
             onPressed: _loading ? null : request,
           ),
           Container(
