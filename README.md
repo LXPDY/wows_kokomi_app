@@ -1,16 +1,9 @@
-# wows_kokomi_app
+# 【WIP】Kokomi App
 
-A new Flutter project.
+## 简介
 
-## Getting Started
+基于Flutter开发的跨平台战舰世界战绩查询App
 
-This project is a starting point for a Flutter application.
+使用[Kokomi API](http://www.wows-coral.com:443/docs#/%E7%94%A8%E6%88%B7%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%8E%A5%E5%8F%A3/user_basic_user_info__get)进行数据支持
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+现阶段处于设计以及技术实验中。
