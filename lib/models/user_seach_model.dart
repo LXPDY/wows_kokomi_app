@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:wows_kokomi_app/models/api_url.dart';
 import 'package:wows_kokomi_app/models/server_name.dart';
 
 import '../common/kkm_http_tool.dart';
@@ -45,7 +46,7 @@ class UserList {
   Future<void> init(ServerName server, String nickname, int limit) async {
     String strLimit = limit.toString();
     String serverName = server.name;
-    String url = "api/a/search-users/?server=$serverName&nickname=$nickname&limit=$strLimit";
+    String url = "$api_url/a/search-users/?server=$serverName&nickname=$nickname&limit=$strLimit";
     Response response = await httpTool.httpGet(url);
     Map<String, dynamic> json;
     if (response.statusCode == 404) {

@@ -6,7 +6,12 @@ class KkmHttpTool {
   Future<Response> httpGet(String url) async {
     Response response = http.Response("http_request_unknown_fail", 404);
     try {
-      response = await http.get(Uri.parse(url));
+      response = await http.get(
+      Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer user123456', // 添加Authorization头
+        },
+      );
     } catch (e) {
       response = http.Response("http_request_fail", 404);
     } 
@@ -14,4 +19,4 @@ class KkmHttpTool {
   }
 }
 
-KkmHttpTool httpTool = KkmHttpTool();
+final KkmHttpTool httpTool = KkmHttpTool();
