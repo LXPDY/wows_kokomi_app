@@ -1,0 +1,191 @@
+{
+    "status": "ok",
+    "message": "SUCCESS",
+    "hidden": false,
+    "nickname": "Fuyuyu_Yuzu_Suki",
+    "dog_tag": {
+      "texture_id": 0,
+      "symbol_id": 4232432560,
+      "border_color_id": 0,
+      "background_color_id": 0,
+      "background_id": 0
+    },
+    "data": {
+      "user": {
+        "leveling_tier": 17,
+        "created_at": 1595743688,
+        "leveling_points": 11047,
+        "karma": 1,
+        "last_battle_time": 1705248291
+      },
+      "pr": {
+        "battle_type": {
+          "pvp": {
+            "battles_count": 5577,
+            "wins": 3195,
+            "damage_dealt": 408492039,
+            "frags": 4852,
+            "original_exp": 7131648,
+            "value_battles_count": 5577,
+            "personal_rating": 8887144.834606003,
+            "n_damage_dealt": 7045.005769000002,
+            "n_frags": 6708.678012000003
+          },
+          "pvp_solo": {
+            "battles_count": 2383,
+            "wins": 1239,
+            "damage_dealt": 169669105,
+            "frags": 1993,
+            "original_exp": 2890477,
+            "value_battles_count": 2383,
+            "personal_rating": 3607121.429156999,
+            "n_damage_dealt": 2961.9845369999985,
+            "n_frags": 2802.459282999998
+          },
+          "pvp_div2": {
+            "battles_count": 1188,
+            "wins": 654,
+            "damage_dealt": 81344649,
+            "frags": 999,
+            "original_exp": 1481145,
+            "value_battles_count": 1188,
+            "personal_rating": 1802497.3505519999,
+            "n_damage_dealt": 1449.9610680000005,
+            "n_frags": 1366.189207
+          },
+          "pvp_div3": {
+            "battles_count": 2006,
+            "wins": 1302,
+            "damage_dealt": 157478285,
+            "frags": 1860,
+            "original_exp": 2760026,
+            "value_battles_count": 2006,
+            "personal_rating": 3511376.388931,
+            "n_damage_dealt": 2633.060162999998,
+            "n_frags": 2540.029525
+          },
+          "rank_solo": {
+            "battles_count": 1163,
+            "wins": 629,
+            "damage_dealt": 67772876,
+            "frags": 870,
+            "original_exp": 1366247,
+            "value_battles_count": 1163,
+            "personal_rating": 1866527.952518,
+            "n_damage_dealt": 1314.1902479999997,
+            "n_frags": 1218.266834
+          }
+        },
+        "ship_type": {
+          "AirCarrier": {
+            "battles_count": 331,
+            "wins": 181,
+            "damage_dealt": 34291448,
+            "frags": 342,
+            "original_exp": 420836,
+            "value_battles_count": 331,
+            "personal_rating": 552442.831318,
+            "n_damage_dealt": 432.595639,
+            "n_frags": 431.168117
+          },
+          "Battleship": {
+            "battles_count": 1303,
+            "wins": 733,
+            "damage_dealt": 117065474,
+            "frags": 1171,
+            "original_exp": 1650461,
+            "value_battles_count": 1303,
+            "personal_rating": 1959126.049084,
+            "n_damage_dealt": 1558.5408750000001,
+            "n_frags": 1557.95454
+          },
+          "Cruiser": {
+            "battles_count": 1590,
+            "wins": 854,
+            "damage_dealt": 116944384,
+            "frags": 1276,
+            "original_exp": 1931230,
+            "value_battles_count": 1590,
+            "personal_rating": 2370313.1549629993,
+            "n_damage_dealt": 1940.586748,
+            "n_frags": 1832.7199770000004
+          },
+          "Destroyer": {
+            "battles_count": 2253,
+            "wins": 1378,
+            "damage_dealt": 135364095,
+            "frags": 2008,
+            "original_exp": 3016699,
+            "value_battles_count": 2253,
+            "personal_rating": 3821210.0740370005,
+            "n_damage_dealt": 2960.405943999999,
+            "n_frags": 2768.0365590000006
+          },
+          "Submarine": {
+            "battles_count": 100,
+            "wins": 49,
+            "damage_dealt": 4826638,
+            "frags": 55,
+            "original_exp": 112422,
+            "value_battles_count": 100,
+            "personal_rating": 184052.72520400002,
+            "n_damage_dealt": 152.876563,
+            "n_frags": 118.798819
+          }
+        },
+        "ship_tier": {
+          "1": 9,
+          "2": 5,
+          "3": 4,
+          "4": 21,
+          "5": 46,
+          "6": 181,
+          "7": 261,
+          "8": 1053,
+          "9": 921,
+          "10": 2983,
+          "11": 93
+        }
+      },
+      "season": {
+        "1012": {
+          "battles_count": 0,
+          "wins": 0,
+          "damage_dealt": 0,
+          "frags": 0,
+          "original_exp": 0,
+          "best_season_rank": 3,
+          "best_rank": 10
+        },
+        "1013": {
+          "battles_count": 0,
+          "wins": 0,
+          "damage_dealt": 0,
+          "frags": 0,
+          "original_exp": 0,
+          "best_season_rank": 3,
+          "best_rank": 10
+        },
+        "1014": {
+          "battles_count": 0,
+          "wins": 0,
+          "damage_dealt": 0,
+          "frags": 0,
+          "original_exp": 0,
+          "best_season_rank": 3,
+          "best_rank": 10
+        }
+      },
+      "clans": {
+        "role": "commissioned_officer",
+        "clan": {
+          "members_count": 46,
+          "name": "米奇妙妙屋",
+          "tag": "KUSA",
+          "color": 12511165
+        },
+        "joined_at": "2023-07-12T02:51:45.376018",
+        "clan_id": 2000023778
+      }
+    }
+  }

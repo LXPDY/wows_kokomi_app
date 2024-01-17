@@ -1,7 +1,6 @@
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:wows_kokomi_app/common/KkmHttpTool.dart';
-import 'package:wows_kokomi_app/models/TestModel.dart';
+import 'package:http/http.dart';
+import 'package:wows_kokomi_app/common/kkm_http_tool.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,22 +50,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final int _counter = 0;
   bool _loading = false;
   String? _text = "";
   final KkmHttpTool _httpTool = KkmHttpTool();
-  Future<TestModel>? model;
-
    getModle() async {
       setState(() {
       _loading = true;
     _text = "正在请求...";
     });
-    model =_httpTool.httpGet();
-    model!.then((textModel){
+    Future<Response> response =_httpTool.httpGet("http://www.wows-coral.com:443/test/");
+    response.then((res){
     setState(()  {
-        _text = textModel.text;
-              _loading = false;
+        _text = res.body;
+        _loading = false;
     });
     });
 
