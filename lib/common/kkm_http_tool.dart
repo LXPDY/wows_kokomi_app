@@ -14,3 +14,4 @@ class KkmHttpTool {
   }
 }
 
+KkmHttpTool httpTool = KkmHttpTool();
