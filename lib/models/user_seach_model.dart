@@ -34,6 +34,7 @@ class ListUserData {
     name = json['name'];
     aid = json['aid'];
   }
+  ListUserData.createData(this.name, this.aid);
 }
 
 /// 获取用户列表数据
@@ -68,3 +69,4 @@ class UserList {
     }
   }
 }
+
