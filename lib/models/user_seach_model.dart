@@ -44,16 +44,18 @@ class UserList {
   UserList();
 
   Future<void> init(ServerName server, String nickname, int limit) async {
+    userListModel = null;
+    errorModel = null;
     String strLimit = limit.toString();
     String serverName = server.name;
-    String url = "$api_url/a/search-users/?server=$serverName&nickname=$nickname&limit=$strLimit";
+    String url = "$apiUrl/a/search-users/?server=$serverName&nickname=$nickname&limit=$strLimit";
     Response response = await httpTool.httpGet(url);
     Map<String, dynamic> json;
     if (response.statusCode == 404) {
       json = {
           "status": "error",
-          "message": "APP ERROR",
-          "error": "Http get fail"
+          "message": "APP错误,获取用户搜索数据失败,请截图并联系开发者",
+          "error": response.body
       };
     } else {
       json = jsonDecode(response.body);
