@@ -29,7 +29,7 @@ class _UserDataListPageState extends State<UserDataListPage> {
     super.initState();
     fetchData();
   }
-
+  
   Future<void> fetchData() async {
     UserList userList = UserList();
     await userList.init(widget.serverName, widget.userName, limit);

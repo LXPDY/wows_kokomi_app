@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wows_kokomi_app/widgets/app_home_page.dart';
 // import 'package:http/http.dart';
 // import 'package:wows_kokomi_app/common/kkm_http_tool.dart';
 // import 'package:wows_kokomi_app/models/server_name.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const UserInputPage(),
+      home:  MyHomePage(),
     );
   }
 }

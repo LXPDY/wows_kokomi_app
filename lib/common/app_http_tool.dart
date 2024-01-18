@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 /// Http请求工具类，通过url获得http返回
-class KkmHttpTool {
+class AppHttpTool {
   Future<Response> httpGet(String url) async {
     Response response = http.Response("http_request_unknown_fail", 404);
     try {
@@ -19,4 +19,4 @@ class KkmHttpTool {
   }
 }
 
-final KkmHttpTool httpTool = KkmHttpTool();
+final AppHttpTool httpTool = AppHttpTool();

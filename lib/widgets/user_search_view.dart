@@ -22,7 +22,7 @@ class _UserInputPageState extends State<UserInputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('搜索用户')),
+      appBar: AppBar(title: const Text('搜索玩家')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

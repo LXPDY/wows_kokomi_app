@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'package:wows_kokomi_app/common/user_global.dart';
 import 'package:wows_kokomi_app/models/server_name.dart';
 
-import '../common/kkm_http_tool.dart';
+import '../common/app_http_tool.dart';
 import 'error_model.dart';
 
 /// 用户搜索数据集
