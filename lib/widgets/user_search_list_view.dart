@@ -56,7 +56,7 @@ class _UserDataListPageState extends State<UserDataListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('User Data List')),
+        appBar: AppBar(title: const Text('搜索结果')),
         body: data == null
             ? const Center(child: CircularProgressIndicator())
             : RefreshIndicator(

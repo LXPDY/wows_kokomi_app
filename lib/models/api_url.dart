@@ -1,1 +1,0 @@
-const String apiUrl = "http://www.wows-coral.com:8000";

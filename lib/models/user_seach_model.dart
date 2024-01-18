@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:wows_kokomi_app/models/api_url.dart';
+import 'package:wows_kokomi_app/common/user_global.dart';
 import 'package:wows_kokomi_app/models/server_name.dart';
 
 import '../common/kkm_http_tool.dart';
