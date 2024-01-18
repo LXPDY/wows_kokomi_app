@@ -6,11 +6,15 @@ import 'package:wows_kokomi_app/models/user_seach_model.dart';
 import 'package:wows_kokomi_app/widgets/error_widget.dart';
 
 const int limit = 10;
-final ListUserData searchLastData = ListUserData.createData("列表最多展示$limit个用户数据,如果未搜到请更详细地搜索,或检查用户名", null);
-final ListUserData searchErrorData = ListUserData.createData("获取用户列表为空,请检查网络环境以及用户名后刷新,或联系开发者", null);
+final ListUserData searchLastData =
+    ListUserData.createData("列表最多展示$limit个用户数据,如果未搜到请更详细地搜索,或检查用户名", null);
+final ListUserData searchErrorData =
+    ListUserData.createData("获取用户列表为空,请检查网络环境以及用户名后刷新,或联系开发者", null);
 
 class UserDataListPage extends StatefulWidget {
-  const UserDataListPage({Key? key, required this.serverName, required this.userName}) : super(key: key);
+  const UserDataListPage(
+      {Key? key, required this.serverName, required this.userName})
+      : super(key: key);
   final ServerName serverName;
   final String userName;
   @override
@@ -40,10 +44,12 @@ class _UserDataListPageState extends State<UserDataListPage> {
       errorWidge(userList.errorModel);
     }
   }
-  void errorWidge(ErrorHttpModel? errorHttpModel){
-          Navigator.push(
+
+  void errorWidge(ErrorHttpModel? errorHttpModel) {
+    Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => HttpErrorWidget(errorModel: errorHttpModel)),
+      MaterialPageRoute(
+          builder: (context) => HttpErrorWidget(errorModel: errorHttpModel)),
     );
   }
 
@@ -53,27 +59,29 @@ class _UserDataListPageState extends State<UserDataListPage> {
         appBar: AppBar(title: const Text('User Data List')),
         body: data == null
             ? const Center(child: CircularProgressIndicator())
-             : RefreshIndicator(
-              onRefresh: fetchData,
-            child: ListView.builder(
-                itemCount: data!.length,
-                itemBuilder: (context, index) {
-                  final userData = data![index];
-                  return InkWell(
-                    onTap: () {
-                      // 在这里处理点击事件
-                      if (kDebugMode) {
-                        print('Clicked on ${userData.name}');
-                      }
-                    },
-                    child: ListTile(
-                      title: Text(userData.name ?? ''),
-                      subtitle: Text('AID: ${userData.aid}'),
-                    ),
-                  );
-                },
-            )
-              ));
+            : RefreshIndicator(
+                onRefresh: fetchData,
+                child: ListView.builder(
+                  itemCount: data!.length,
+                  itemBuilder: (context, index) {
+                    final userData = data![index];
+                    return InkWell(
+                      onTap: () {
+                        // 在这里处理点击事件
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        if (kDebugMode) {
+                          print('Clicked on ${userData.name}');
+                        }
+                        if (userData.aid == null) {
+                          return;
+                        }
+                      },
+                      child: ListTile(
+                        title: Text(userData.name ?? ''),
+                        subtitle: Text('AID: ${userData.aid}'),
+                      ),
+                    );
+                  },
+                )));
   }
 }
-

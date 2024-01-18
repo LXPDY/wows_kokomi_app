@@ -25,7 +25,7 @@ class _UserInputPageState extends State<UserInputPage> {
       appBar: AppBar(title: const Text('搜索用户')),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
             child: Column(
@@ -33,47 +33,56 @@ class _UserInputPageState extends State<UserInputPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
+                  style: const TextStyle(fontSize: 18),
                   controller: _userNameController,
                   decoration: const InputDecoration(
-                    labelText: '用户名',
+                    labelText: ' 用户名',
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 12),
+                    border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return '用户名不能为空';
                     }
-                    if (!RegExp(r'^[a-zA-Z0-9_!@#$%^&*(),.?":{}|<>]+$')
-                        .hasMatch(value)) {
-                      return '请不要输入特殊符号';
-                    }
                     return null;
                   },
                 ),
                 const SizedBox(height: 16),
-                DropdownButtonFormField<ServerName>(
-                  hint: const Text('选择账户所在服务器'),
-                  value: _selectedServerName,
-                  onChanged: (ServerName? newValue) {
-                    setState(() {
-                      _selectedServerName = newValue;
-                    });
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: '选择服务器',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: PopupMenuButton<ServerName>(
+                      icon: const Icon(Icons.arrow_drop_down),
+                      itemBuilder: (BuildContext context) {
+                        return ServerName.values
+                            .map<PopupMenuItem<ServerName>>((ServerName value) {
+                          return PopupMenuItem<ServerName>(
+                            value: value,
+                            child: Text(value.name),
+                          );
+                        }).toList();
+                      },
+                      onSelected: (ServerName? newValue) {
+                        setState(() {
+                          _selectedServerName = newValue;
+                        });
+                      },
+                    ),
+                  ),
+                  readOnly: true,
+                  controller: TextEditingController(
+                    text: _selectedServerName?.name ?? '点击选择服务器',
+                  ),
+                  onTap: () {
+                    // 防止打开键盘
+                    FocusScope.of(context).requestFocus(FocusNode());
                   },
-                  validator: (value) {
-                    if (value == null) {
-                      return '服务器不能为空';
-                    }
-                    return null;
-                  },
-                  items: ServerName.values
-                      .map<DropdownMenuItem<ServerName>>((ServerName value) {
-                    return DropdownMenuItem<ServerName>(
-                      value: value,
-                      child: Text(value.name),
-                    );
-                  }).toList(),
                 ),
                 const SizedBox(height: 16),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
                       onPressed: () {
