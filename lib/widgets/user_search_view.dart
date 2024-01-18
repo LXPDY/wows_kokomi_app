@@ -87,15 +87,24 @@ class _UserInputPageState extends State<UserInputPage> {
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UserDataListPage(
-                                serverName: _selectedServerName!,
-                                userName: _userNameController.text,
+                          if (_selectedServerName != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserDataListPage(
+                                  serverName: _selectedServerName!,
+                                  userName: _userNameController.text,
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('服务器不能为空'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          }
                         }
                       },
                       child: const Text('搜索'),

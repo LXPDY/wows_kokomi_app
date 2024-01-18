@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:wows_kokomi_app/widgets/user_search_view.dart';
+import 'package:wows_kokomi_app/widgets/app_darwer.dart';
+import 'package:wows_kokomi_app/widgets/app_recent_page.dart';
+import 'package:wows_kokomi_app/widgets/app_tools_page.dart';
+import 'package:wows_kokomi_app/widgets/ship_list_page.dart';
+import 'package:wows_kokomi_app/widgets/user_info_page.dart';
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -9,9 +15,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static const List<Widget> _pages = <Widget>[
-    Text('TODO:个人信息'),
-    Text('TODO:Recent战绩'),
-    Text('TODO:小工具'),
+    UserInfoPage(),
+    RecentPage(),
+    ShipListPage(),
+    ToolsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -24,57 +31,38 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('KOKOMI APP')),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'TODO:玩家信息',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.search),
-              title: const Text('搜索玩家'),
-              onTap: () {
-                // 在这里执行跳转到搜索界面的操作
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const UserInputPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const AppDrawer(),
       body: Center(
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: Colors.grey),
             label: '玩家信息',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: Icon(Icons.business, color: Colors.grey),
             label: 'Recent',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.directions_boat, color: Colors.grey),
+            label: '船只列表',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.school,
+              color: Colors.grey,
+            ),
             label: '小工具',
           ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        selectedItemColor: Colors.grey, // 设置选中项的文字颜色
+        unselectedItemColor: Colors.grey, // 设置未选中项的文字颜色
       ),
     );
   }
 }
+

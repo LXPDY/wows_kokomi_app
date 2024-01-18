@@ -30,7 +30,9 @@ class HttpErrorWidget extends StatelessWidget {
               Text(
                 '错误返回类型(Error): ${errorModel?.error}',
                 style: const TextStyle(fontSize: 16),
+                
               ),
+              const SizedBox(height: 18),
               const Text(
                 '开发者联系方式: QQ:1747343655',
                 style: TextStyle(fontSize: 16),
