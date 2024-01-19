@@ -29,7 +29,7 @@ class _UserDataListPageState extends State<UserDataListPage> {
     super.initState();
     fetchData();
   }
-  
+
   Future<void> fetchData() async {
     UserList userList = UserList();
     await userList.init(widget.serverName, widget.userName, limit);
@@ -78,7 +78,7 @@ class _UserDataListPageState extends State<UserDataListPage> {
                       },
                       child: ListTile(
                         title: Text(userData.name ?? ''),
-                        subtitle: Text('AID: ${userData.aid}'),
+                        subtitle: Text('${userData.aid}'),
                       ),
                     );
                   },

@@ -5,14 +5,28 @@ void main() {
   runApp(const MyApp());
 }
 
+class AppTheme {
+  static ThemeData build() {
+    return ThemeData(
+      fontFamily: 'SourceHanSansCN',
+      // 其他主题设置
+      textTheme: const TextTheme(
+        bodyText1: TextStyle(fontWeight: FontWeight.w500),
+        bodyText2: TextStyle(fontWeight: FontWeight.w700),
+      ),
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home:  MyHomePage(),
+    return MaterialApp(
+      theme: AppTheme.build(),
+      home: const MyHomePage(),
     );
   }
 }

@@ -40,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Colors.grey),
             label: '玩家信息',
+            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business, color: Colors.grey),
