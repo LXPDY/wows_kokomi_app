@@ -40,7 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Colors.grey),
             label: '玩家信息',
-            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business, color: Colors.grey),
@@ -61,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         selectedItemColor: Colors.grey, // 设置选中项的文字颜色
-        unselectedItemColor: Colors.grey, // 设置未选中项的文字颜色
       ),
     );
   }

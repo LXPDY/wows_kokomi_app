@@ -20,7 +20,7 @@ class _UserInfoPage extends State<UserInfoPage> {
   }
 
   Future<void> _loadData() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
   }
 
   @override
@@ -127,7 +127,7 @@ class _UserInfoPage extends State<UserInfoPage> {
                           mainAxisSpacing: 8,
                           crossAxisSpacing: 8,
                           children: [
-                            buildStatCard('战斗场次', '1000',
+                            buildStatCard('战斗场次', '100000',
                                 titleFontSize: size5,
                                 titleFontWeight: FontWeight.w700,
                                 valueFontSize: size2),

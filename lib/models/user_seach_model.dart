@@ -59,7 +59,8 @@ class UserList {
           "error": response.body
       };
     } else {
-      json = jsonDecode(response.body);
+      final decodedData = utf8.decode(response.bodyBytes);
+      json = jsonDecode(decodedData);
     }
     String status = json['status'];
     if (status == "error") {
