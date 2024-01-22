@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wows_kokomi_app/widgets/app_darwer.dart';
-import 'package:wows_kokomi_app/widgets/app_recent_page.dart';
-import 'package:wows_kokomi_app/widgets/app_tools_page.dart';
-import 'package:wows_kokomi_app/widgets/ship_list_page.dart';
-import 'package:wows_kokomi_app/widgets/user_info_page.dart';
+import 'package:wows_kokomi_app/widgets/darwer_page/app_darwer.dart';
+import 'package:wows_kokomi_app/widgets/main_page/app_recent_page.dart';
+import 'package:wows_kokomi_app/widgets/main_page/app_tools_page.dart';
+import 'package:wows_kokomi_app/widgets/main_page/ship_list_page.dart';
+import 'package:wows_kokomi_app/widgets/main_page/user_info_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);

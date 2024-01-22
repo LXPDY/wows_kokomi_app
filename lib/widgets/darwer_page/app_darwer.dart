@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wows_kokomi_app/widgets/app_contributer.dart';
-import 'package:wows_kokomi_app/widgets/user_search_view.dart';
+import 'package:wows_kokomi_app/widgets/search_page/user_search_view.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);

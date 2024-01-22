@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wows_kokomi_app/widgets/app_home_page.dart';
+import 'package:wows_kokomi_app/widgets/main_page/app_home_page.dart';
 
 void main() {
   runApp(const MyApp());
