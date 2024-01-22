@@ -17,6 +17,7 @@ class AppHttpTool {
     } 
     return response;
   }
+  
 }
 
 final AppHttpTool httpTool = AppHttpTool();

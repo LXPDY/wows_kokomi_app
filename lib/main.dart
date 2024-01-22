@@ -27,6 +27,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: AppTheme.build(),
       home: const MyHomePage(),
+      builder: (BuildContext context, Widget? child) {
+        // 获取当前 MediaQuery 数据,限制字体大小
+        final mediaQueryData = MediaQuery.of(context);
+        final newMediaQueryData = mediaQueryData.copyWith(textScaleFactor: 1.0);
+        return MediaQuery(
+          data: newMediaQueryData,
+          child: child!,
+        );
+      },
     );
   }
 }

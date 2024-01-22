@@ -71,3 +71,5 @@ class UserList {
   }
 }
 
+
+// curl -X 'GET' 'http://www.wows-coral.com:8000/a/search-users/?server=asia&nickname=fuyuyu&limit=10' -H 'accept: application/json' -H 'Authorization: Bearer user123456'

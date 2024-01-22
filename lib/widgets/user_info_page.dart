@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:wows_kokomi_app/common/color_tool.dart';
 import 'package:wows_kokomi_app/models/auto_size_model.dart';
+import 'package:wows_kokomi_app/models/user_model.dart';
 
 class UserInfoPage extends StatefulWidget {
   const UserInfoPage({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class UserInfoPage extends StatefulWidget {
 
 class _UserInfoPage extends State<UserInfoPage> {
   late Future<void> _refreshData;
-
+  UserInfo userInfo = UserInfo();
   @override
   void initState() {
     super.initState();
@@ -109,8 +111,8 @@ class _UserInfoPage extends State<UserInfoPage> {
                           padding:
                               EdgeInsets.symmetric(vertical: defaultFront / 2),
                           width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
+                          decoration: BoxDecoration(
+                            color: colorFromePR(-1),
                           ),
                           child: const Text(
                             '水平未知（+000)',
@@ -129,27 +131,24 @@ class _UserInfoPage extends State<UserInfoPage> {
                           children: [
                             buildStatCard('战斗场次', '100000',
                                 titleFontSize: size5,
-                                titleFontWeight: FontWeight.w700,
                                 valueFontSize: size2),
                             buildStatCard('平均胜率', '60%',
                                 titleFontSize: size5,
-                                titleFontWeight: FontWeight.w700,
-                                valueFontSize: size2),
+                                valueFontSize: size2,
+                                valueFontColor: colorFromeWR(60)),
                             buildStatCard('场均伤害', '2000',
                                 titleFontSize: size5,
-                                titleFontWeight: FontWeight.w700,
-                                valueFontSize: size2),
+                                valueFontSize: size2,
+                                valueFontColor: colorFromeDd(1.1)),
                             buildStatCard('场均击杀', '2',
                                 titleFontSize: size5,
-                                titleFontWeight: FontWeight.w700,
-                                valueFontSize: size2),
+                                valueFontSize: size2,
+                                valueFontColor: colorFromeF(2)),
                             buildStatCard('场均经验', '500',
                                 titleFontSize: size5,
-                                titleFontWeight: FontWeight.w700,
                                 valueFontSize: size2),
                             buildStatCard('主炮命中', '80%',
                                 titleFontSize: size5,
-                                titleFontWeight: FontWeight.w700,
                                 valueFontSize: size2),
                           ],
                         ),
@@ -193,8 +192,9 @@ class _UserInfoPage extends State<UserInfoPage> {
   Widget buildStatCard(String title, String value,
       {double titleFontSize = 12,
       double valueFontSize = 16,
-      FontWeight titleFontWeight = FontWeight.normal,
-      FontWeight valueFontWeight = FontWeight.bold}) {
+      FontWeight titleFontWeight = FontWeight.bold,
+      FontWeight valueFontWeight = FontWeight.bold,
+      Color valueFontColor = Colors.black}) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -215,7 +215,7 @@ class _UserInfoPage extends State<UserInfoPage> {
           Text(
             value,
             style:
-                TextStyle(fontSize: valueFontSize, fontWeight: valueFontWeight),
+                TextStyle(fontSize: valueFontSize, fontWeight: valueFontWeight, color: valueFontColor),
           ),
         ],
       ),

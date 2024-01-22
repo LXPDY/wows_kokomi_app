@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ContributorsPage extends StatelessWidget {
-  // 注意这里没有使用 const
   ContributorsPage({Key? key}) : super(key: key);
 
   final List<String> contributors = [
