@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-/// Http请求工具类，通过url获得http返回
-class AppHttpTool {
+/// Http请求工具，通过url获得http返回
+
   Future<Response> httpGet(String url) async {
     Response response = http.Response("http_request_unknown_fail", 404);
     try {
@@ -18,6 +18,3 @@ class AppHttpTool {
     return response;
   }
   
-}
-
-final AppHttpTool httpTool = AppHttpTool();

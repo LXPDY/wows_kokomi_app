@@ -50,7 +50,7 @@ class UserList {
     String strLimit = limit.toString();
     String serverName = server.name;
     String url = "$apiUrl/a/search-users/?server=$serverName&nickname=$nickname&limit=$strLimit";
-    Response response = await httpTool.httpGet(url);
+    Response response = await httpGet(url);
     Map<String, dynamic> json;
     if (response.statusCode == 404) {
       json = {

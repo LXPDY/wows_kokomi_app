@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wows_kokomi_app/models/error_model.dart';
+import 'package:wows_kokomi_app/models/server_name.dart';
+import 'package:wows_kokomi_app/widgets/app_sys_page/error_widget.dart';
 import 'package:wows_kokomi_app/widgets/darwer_page/app_darwer.dart';
 import 'package:wows_kokomi_app/widgets/main_page/app_recent_page.dart';
 import 'package:wows_kokomi_app/widgets/main_page/app_tools_page.dart';
@@ -6,25 +9,42 @@ import 'package:wows_kokomi_app/widgets/main_page/ship_list_page.dart';
 import 'package:wows_kokomi_app/widgets/main_page/user_info_page.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
+  final int initialIndex;
+  final String aid;
+  final ServerName serverName;
+  const MyHomePage({Key? key, required this.initialIndex, required this.aid, required this.serverName}) : super(key: key);
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  static const List<Widget> _pages = <Widget>[
-    UserInfoPage(),
-    RecentPage(),
-    ShipListPage(),
-    ToolsPage(),
+  static final List<Widget> _pages = <Widget>[
+    UserInfoPage(aid: '2023619512', serverName: ServerName.asia),
+    const RecentPage(),
+    const ShipListPage(),
+    const ToolsPage(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+  void errorWidge(ErrorHttpModel? errorHttpModel) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => HttpErrorWidget(errorModel: errorHttpModel)),
+    );
+  }
+  
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+    _pages[0] = UserInfoPage(aid: widget.aid, serverName: widget.serverName);
   }
 
   @override
@@ -64,4 +84,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-

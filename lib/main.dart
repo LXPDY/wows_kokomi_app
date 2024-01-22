@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wows_kokomi_app/models/server_name.dart';
 import 'package:wows_kokomi_app/widgets/main_page/app_home_page.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.build(),
-      home: const MyHomePage(),
+      home: const MyHomePage(initialIndex: 0, aid: '2027994108', serverName: ServerName.asia,),
       builder: (BuildContext context, Widget? child) {
         // 获取当前 MediaQuery 数据,限制字体大小
         final mediaQueryData = MediaQuery.of(context);

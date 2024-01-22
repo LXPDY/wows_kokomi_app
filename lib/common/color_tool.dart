@@ -32,7 +32,7 @@ Color colorFromePR(final int pr) {
   return colorUnknown;
 }
 
-Color colorFromeWR(int wr) {
+Color colorFromeWR(final double wr) {
   if (wr >= 70){
     return colorSuperPink;
   } else if (wr >= 60) {
@@ -53,7 +53,7 @@ Color colorFromeWR(int wr) {
   return colorUnknown;
 }
 
-Color colorFromeDd(double dd) {
+Color colorFromeDd(final double dd) {
   if (dd >= 1.7){
     return colorSuperPink;
   } else if (dd >= 1.4) {
@@ -93,4 +93,25 @@ Color colorFromeF(double f) {
     return colorNeedEffort;
   }
   return colorUnknown;
+}
+
+String strFromePR(final int pr) {
+  if (pr >= 2450){
+    return "神佬平均";
+  } else if (pr >= 2100) {
+    return "大佬平均";
+  } else if (pr >= 1750) {
+    return "非常好";
+  } else if (pr >= 1550){
+    return "很好";
+  } else if (pr >= 1350) {
+    return "好";
+  } else if (pr >= 1100) {
+    return "平均水平";
+  } else if (pr >= 750) {
+    return "低于平均";
+  } else if (pr >= 0) {
+    return "还需努力";
+  }
+  return "水平未知	";
 }

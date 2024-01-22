@@ -4,6 +4,7 @@ import 'package:wows_kokomi_app/models/error_model.dart';
 import 'package:wows_kokomi_app/models/server_name.dart';
 import 'package:wows_kokomi_app/models/user_seach_model.dart';
 import 'package:wows_kokomi_app/widgets/app_sys_page/error_widget.dart';
+import 'package:wows_kokomi_app/widgets/main_page/app_home_page.dart';
 
 const int limit = 10;
 final ListUserData searchLastData =
@@ -75,6 +76,11 @@ class _UserDataListPageState extends State<UserDataListPage> {
                         if (userData.aid == null) {
                           return;
                         }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>  MyHomePage(initialIndex: 0, aid: userData.aid.toString(), serverName: widget.serverName,),
+                            ));
                       },
                       child: ListTile(
                         title: Text(userData.name ?? ''),
