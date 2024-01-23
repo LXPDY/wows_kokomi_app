@@ -76,9 +76,7 @@ class _UserInfoPage extends State<UserInfoPage> {
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: defaultFront,
-                                    color: Color(widget.userInfo.userInfoModel!
-                                            .data.clan.color |
-                                        0xFF000000), // 设置第一段文本的颜色
+                                    color: colorFromStr(widget.userInfo.userInfoModel!.data.clan.color), // 设置第一段文本的颜色
                                   ),
                                 ),
                                 TextSpan(
@@ -98,11 +96,11 @@ class _UserInfoPage extends State<UserInfoPage> {
                             text:  TextSpan(
                               children: [
                                 const TextSpan(
-                                  text: '注册日期（TODO：时间翻译）: ',
+                                  text: '注册日期: ',
                                   style: TextStyle(color: Colors.grey),
                                 ),
                                 TextSpan(
-                                  text: '${widget.userInfo.userInfoModel?.data.user.createdAt}',
+                                  text: widget.userInfo.userInfoModel!.data.user.accountCreationTime,
                                   style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
@@ -148,10 +146,10 @@ class _UserInfoPage extends State<UserInfoPage> {
                                 vertical: defaultFront / 2),
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: colorFromePR(widget.userInfo.userInfoModel!.data.battleType.pvp.personalRating~/widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount.toInt()),
+                              color: colorFromStr(widget.userInfo.userInfoModel!.data.battleType.pvp.avgPrColor),
                             ),
                             child:  Text(
-                              '${strFromePR(widget.userInfo.userInfoModel!.data.battleType.pvp.personalRating~/widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount.toInt())} +(${widget.userInfo.userInfoModel!.data.battleType.pvp.personalRating~/widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount})',
+                              '${strFromePR(widget.userInfo.userInfoModel!.data.battleType.pvp.avgPr)} (+${widget.userInfo.userInfoModel!.data.battleType.pvp.avgPrDis})',
                               textAlign: TextAlign.center,
                               style: const TextStyle(color: Colors.white),
                             ),
@@ -167,21 +165,22 @@ class _UserInfoPage extends State<UserInfoPage> {
                             children: [
                               buildStatCard('战斗场次', '${widget.userInfo.userInfoModel?.data.battleType.pvp.battlesCount}',
                                   titleFontSize: size5, valueFontSize: size2),
-                              buildStatCard('平均胜率', '${(widget.userInfo.userInfoModel!.data.battleType.pvp.wins/widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount*100).toStringAsFixed(2)}%',
+                              buildStatCard('平均胜率', '${widget.userInfo.userInfoModel!.data.battleType.pvp.winRate}%',
                                   titleFontSize: size5,
                                   valueFontSize: size2,
-                                  valueFontColor: colorFromeWR(widget.userInfo.userInfoModel!.data.battleType.pvp.wins/widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount*100)),
-                              buildStatCard('场均伤害', (widget.userInfo.userInfoModel!.data.battleType.pvp.damageDealt ~/ widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount).toString(),
+                                  valueFontColor: colorFromStr(widget.userInfo.userInfoModel!.data.battleType.pvp.winRateColor)),
+                              buildStatCard('场均伤害', widget.userInfo.userInfoModel!.data.battleType.pvp.avgDamage.toString(),
                                   titleFontSize: size5,
                                   valueFontSize: size2,
-                                  valueFontColor: colorFromeDd(widget.userInfo.userInfoModel!.data.battleType.pvp.damageDealt / widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount)),
-                              buildStatCard('场均击杀', (widget.userInfo.userInfoModel!.data.battleType.pvp.nFrags / widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount).toStringAsFixed(2),
+                                  valueFontColor: colorFromStr(widget.userInfo.userInfoModel!.data.battleType.pvp.avgDamageColor)),
+                              buildStatCard('场均击杀', widget.userInfo.userInfoModel!.data.battleType.pvp.avgFrags.toString(),
                                   titleFontSize: size5,
                                   valueFontSize: size2,
-                                  valueFontColor: colorFromeF(widget.userInfo.userInfoModel!.data.battleType.pvp.nFrags / widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount)),
-                              buildStatCard('场均经验', (widget.userInfo.userInfoModel!.data.battleType.pvp.originalExp ~/ widget.userInfo.userInfoModel!.data.battleType.pvp.battlesCount).toStringAsFixed(2),
-                                  titleFontSize: size5, valueFontSize: size2),
-                              buildStatCard('主炮命中', (widget.userInfo.userInfoModel!.data.battleType.pvp.hitsByMain / widget.userInfo.userInfoModel!.data.battleType.pvp.shotsByMain).toStringAsFixed(2),
+                                  valueFontColor: colorFromStr(widget.userInfo.userInfoModel!.data.battleType.pvp.avgFragsColor)),
+                              buildStatCard('场均经验', widget.userInfo.userInfoModel!.data.battleType.pvp.avgExp.toString(),
+                                  titleFontSize: size5, valueFontSize: size2,),
+                                  
+                              buildStatCard('主炮命中', '${widget.userInfo.userInfoModel!.data.battleType.pvp.hitRatio.toString()}%',
                                   titleFontSize: size5, valueFontSize: size2),
                             ],
                           ),

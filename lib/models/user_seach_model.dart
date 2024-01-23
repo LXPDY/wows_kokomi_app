@@ -55,7 +55,7 @@ class UserList {
     if (response.statusCode == 404) {
       json = {
           "status": "error",
-          "message": "APP错误,获取用户搜索数据失败,请截图并联系开发者",
+          "message": "获取用户搜索数据失败,请截图并联系开发者",
           "error": response.body
       };
     } else {

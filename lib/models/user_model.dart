@@ -20,7 +20,7 @@ class UserInfo {
     if (response.statusCode == 404) {
       json = {
         "status": "error",
-        "message": "APP错误,获取用户数据失败,请截图并联系开发者",
+        "message": "获取用户数据失败,请截图并联系开发者",
         "error": response.body
       };
     } else {
@@ -85,12 +85,14 @@ class UserData {
   User user;
   Clan clan;
   BattleType battleType;
+  Record record;
 
   UserData({
     required this.nickname,
     required this.user,
     required this.clan,
     required this.battleType,
+    required this.record,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
@@ -99,61 +101,45 @@ class UserData {
       user: User.fromJson(json['user']),
       clan: Clan.fromJson(json['clan']),
       battleType: BattleType.fromJson(json['battle_type']),
+      record: Record.fromJson(json['record']),
     );
   }
 }
 
 class User {
-  int levelingTier;
-  int createdAt;
-  int levelingPoints;
-  int karma;
-  int lastBattleTime;
+  String accountCreationTime;
+  String lastBattleTime;
 
   User({
-    required this.levelingTier,
-    required this.createdAt,
-    required this.levelingPoints,
-    required this.karma,
+    required this.accountCreationTime,
     required this.lastBattleTime,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      levelingTier: json['leveling_tier'],
-      createdAt: json['created_at'],
-      levelingPoints: json['leveling_points'],
-      karma: json['karma'],
+      accountCreationTime: json['account_creation_time'],
       lastBattleTime: json['last_battle_time'],
     );
   }
 }
 
 class Clan {
-  int membersCount;
-  String name;
   String tag;
-  int color;
+  String color;
 
   Clan({
-    required this.membersCount,
-    required this.name,
     required this.tag,
     required this.color,
   });
 
   factory Clan.fromJson(Map<String, dynamic> json) {
-    if (json['members_count'] == null) {
+    if (json['tag'] == null) {
       return Clan(
-        membersCount: 0,
-        name: '无公会',
-        tag: '无公会',
-        color: 0,
+        tag: '无工会',
+        color: '000000',
       );
     }
     return Clan(
-      membersCount: json['members_count'],
-      name: json['name'],
       tag: json['tag'],
       color: json['color'],
     );
@@ -161,135 +147,124 @@ class Clan {
 }
 
 class BattleType {
-  Pvp pvp;
-  PvpSolo pvpSolo;
-  PvpDiv2 pvpDiv2;
+  BattleData pvp;
+  BattleData pvpSolo;
+  BattleData pvpDiv2;
+  BattleData pvpDiv3;
+  BattleData rankSolo;
 
   BattleType({
     required this.pvp,
     required this.pvpSolo,
     required this.pvpDiv2,
+    required this.pvpDiv3,
+    required this.rankSolo,
   });
 
   factory BattleType.fromJson(Map<String, dynamic> json) {
     return BattleType(
-      pvp: Pvp.fromJson(json['pvp']),
-      pvpSolo: PvpSolo.fromJson(json['pvp_solo']),
-      pvpDiv2: PvpDiv2.fromJson(json['pvp_div2']),
+      pvp: BattleData.fromJson(json['pvp']),
+      pvpSolo: BattleData.fromJson(json['pvp_solo']),
+      pvpDiv2: BattleData.fromJson(json['pvp_div2']),
+      pvpDiv3: BattleData.fromJson(json['pvp_div3']),
+      rankSolo: BattleData.fromJson(json['rank_solo']),
     );
   }
 }
 
-class Pvp {
+class BattleData {
   int battlesCount;
-  int wins;
-  int damageDealt;
-  int frags;
-  int originalExp;
-  int hitsByMain;
-  int shotsByMain;
-  int valueBattlesCount;
-  double personalRating;
-  double nDamageDealt;
-  double nFrags;
+  double winRate;
+  int avgDamage;
+  double avgFrags;
+  int avgExp;
+  double hitRatio;
+  int avgPr;
+  int avgPrDis;
+  String avgPrDes;
+  String winRateColor;
+  String avgDamageColor;
+  String avgFragsColor;
+  String avgPrColor;
 
-  Pvp({
+  BattleData({
     required this.battlesCount,
-    required this.wins,
-    required this.damageDealt,
-    required this.frags,
-    required this.originalExp,
-    required this.hitsByMain,
-    required this.shotsByMain,
-    required this.valueBattlesCount,
-    required this.personalRating,
-    required this.nDamageDealt,
-    required this.nFrags,
+    required this.winRate,
+    required this.avgDamage,
+    required this.avgFrags,
+    required this.avgExp,
+    required this.hitRatio,
+    required this.avgPr,
+    required this.avgPrDis,
+    required this.avgPrDes,
+    required this.winRateColor,
+    required this.avgDamageColor,
+    required this.avgFragsColor,
+    required this.avgPrColor,
   });
 
-  factory Pvp.fromJson(Map<String, dynamic> json) {
-    return Pvp(
+  factory BattleData.fromJson(Map<String, dynamic> json) {
+    return BattleData(
       battlesCount: json['battles_count'],
-      wins: json['wins'],
-      damageDealt: json['damage_dealt'],
-      frags: json['frags'],
-      originalExp: json['original_exp'],
-      hitsByMain: json['hits_by_main'],
-      shotsByMain: json['shots_by_main'],
-      valueBattlesCount: json['value_battles_count'],
-      personalRating: json['personal_rating'],
-      nDamageDealt: json['n_damage_dealt'],
-      nFrags: json['n_frags'],
+      winRate: (json['win_rate'] as num).toDouble(),
+      avgDamage: json['avg_damage'],
+      avgFrags: (json['avg_frags'] as num).toDouble(),
+      avgExp: json['avg_exp'],
+      hitRatio: (json['hit_ratio'] as num).toDouble(),
+      avgPr: json['avg_pr'],
+      avgPrDis: json['avg_pr_dis'],
+      avgPrDes: json['avg_pr_des'],
+      winRateColor: json['win_rate_color'],
+      avgDamageColor: json['avg_damage_color'],
+      avgFragsColor: json['avg_frags_color'],
+      avgPrColor: json['avg_pr_color'],
     );
   }
 }
 
-class PvpSolo {
-  int battlesCount;
-  int wins;
-  int damageDealt;
-  int frags;
-  int originalExp;
-  int hitsByMain;
-  int shotsByMain;
-  int valueBattlesCount;
-  double personalRating;
-  double nDamageDealt;
-  double nFrags;
+class Record {
+  RecordData maxBattlesCount;
+  RecordData maxPlanesKilled;
+  RecordData maxDamageDealt;
+  RecordData maxExp;
+  RecordData maxFrags;
+  RecordData maxTotalAgro;
+  RecordData maxScoutingDamage;
 
-  PvpSolo({
-    required this.battlesCount,
-    required this.wins,
-    required this.damageDealt,
-    required this.frags,
-    required this.originalExp,
-    required this.hitsByMain,
-    required this.shotsByMain,
-    required this.valueBattlesCount,
-    required this.personalRating,
-    required this.nDamageDealt,
-    required this.nFrags,
+  Record({
+    required this.maxBattlesCount,
+    required this.maxPlanesKilled,
+    required this.maxDamageDealt,
+    required this.maxExp,
+    required this.maxFrags,
+    required this.maxTotalAgro,
+    required this.maxScoutingDamage,
   });
 
-  factory PvpSolo.fromJson(Map<String, dynamic> json) {
-    return PvpSolo(
-      battlesCount: json['battles_count'],
-      wins: json['wins'],
-      damageDealt: json['damage_dealt'],
-      frags: json['frags'],
-      originalExp: json['original_exp'],
-      hitsByMain: json['hits_by_main'],
-      shotsByMain: json['shots_by_main'],
-      valueBattlesCount: json['value_battles_count'],
-      personalRating: json['personal_rating'],
-      nDamageDealt: json['n_damage_dealt'],
-      nFrags: json['n_frags'],
+  factory Record.fromJson(Map<String, dynamic> json) {
+    return Record(
+      maxBattlesCount: RecordData.fromJson(json['max_battles_count']),
+      maxPlanesKilled: RecordData.fromJson(json['max_planes_killed']),
+      maxDamageDealt: RecordData.fromJson(json['max_damage_dealt']),
+      maxExp: RecordData.fromJson(json['max_exp']),
+      maxFrags: RecordData.fromJson(json['max_frags']),
+      maxTotalAgro: RecordData.fromJson(json['max_total_agro']),
+      maxScoutingDamage: RecordData.fromJson(json['max_scouting_damage']),
     );
   }
 }
 
-class PvpDiv2 {
-  int battlesCount;
-  int wins;
-  int damageDealt;
-  int frags;
+class RecordData {
+  Map<String, int> data;
 
-  PvpDiv2({
-    required this.battlesCount,
-    required this.wins,
-    required this.damageDealt,
-    required this.frags,
+  RecordData({
+    required this.data,
   });
 
-  factory PvpDiv2.fromJson(Map<String, dynamic> json) {
-    return PvpDiv2(
-      battlesCount: json['battles_count'],
-      wins: json['wins'],
-      damageDealt: json['damage_dealt'],
-      frags: json['frags'],
+  factory RecordData.fromJson(Map<String, dynamic> json) {
+    return RecordData(
+      data: Map<String, int>.from(json),
     );
   }
 }
-
-
 // curl -X 'GET' 'http://www.wows-coral.com:8000/a/basic-data/?server=asia&aid=2027994108' -H 'accept: application/json' -H 'Authorization: Bearer user123456'
