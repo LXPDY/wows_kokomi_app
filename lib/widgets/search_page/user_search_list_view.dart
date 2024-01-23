@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:wows_kokomi_app/common/user_global.dart';
 import 'package:wows_kokomi_app/models/error_model.dart';
 import 'package:wows_kokomi_app/models/server_name.dart';
 import 'package:wows_kokomi_app/models/user_seach_model.dart';
@@ -24,11 +25,13 @@ class UserDataListPage extends StatefulWidget {
 
 class _UserDataListPageState extends State<UserDataListPage> {
   List<ListUserData>? data;
+  List<String> accountList = [];
 
   @override
   void initState() {
     super.initState();
     fetchData();
+    fetchAccountList();
   }
 
   Future<void> fetchData() async {
@@ -54,6 +57,11 @@ class _UserDataListPageState extends State<UserDataListPage> {
     );
   }
 
+  Future<void> fetchAccountList() async {
+    accountList = await LocalStorage.getAccountList();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,22 +77,38 @@ class _UserDataListPageState extends State<UserDataListPage> {
                     return InkWell(
                       onTap: () {
                         // 在这里处理点击事件
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        if (kDebugMode) {
-                          print('Clicked on ${userData.name}');
-                        }
                         if (userData.aid == null) {
                           return;
                         }
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>  MyHomePage(initialIndex: 0, aid: userData.aid.toString(), serverName: widget.serverName,),
-                            ));
+                              builder: (context) => MyHomePage(
+                                initialIndex: 0,
+                                aid: userData.aid!.toString(),
+                                serverName: widget.serverName,
+                              ),
+                            ), (route) {
+                          return false;
+                        });
                       },
                       child: ListTile(
                         title: Text(userData.name ?? ''),
                         subtitle: Text('${userData.aid}'),
+                        trailing: (!accountList.contains(
+                                    '${userData.aid}:${userData.name}:${widget.serverName.name}') &&
+                                userData.aid != null)
+                            ? IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () async {
+                                  await LocalStorage.addAccountToList(
+                                      userData.aid.toString(),
+                                      userData.name!,
+                                      widget.serverName);
+                                  fetchAccountList();
+                                },
+                              )
+                            : null,
                       ),
                     );
                   },

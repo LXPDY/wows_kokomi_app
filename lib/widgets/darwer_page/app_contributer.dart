@@ -4,7 +4,9 @@ class ContributorsPage extends StatelessWidget {
   ContributorsPage({Key? key}) : super(key: key);
 
   final List<String> contributors = [
-    '蓝色的蘑菇头奇诺比奥',
+    '蓝色的蘑菇头奇诺比奥 - CN',
+    'Minato_Yukina_my_waifu - EU',
+    'z200207080373 - ASIA',
     // 在这里添加更多贡献者
   ];
 

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wows_kokomi_app/common/user_global.dart';
 import 'package:wows_kokomi_app/models/server_name.dart';
+import 'package:wows_kokomi_app/widgets/darwer_page/app_account_page.dart';
 import 'package:wows_kokomi_app/widgets/main_page/app_home_page.dart';
+import 'package:wows_kokomi_app/widgets/search_page/user_search_list_view.dart';
+import 'package:wows_kokomi_app/widgets/search_page/user_search_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,20 +26,43 @@ class AppTheme {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.build(),
-      home: const MyHomePage(initialIndex: 0, aid: '2027994108', serverName: ServerName.asia,),
-      builder: (BuildContext context, Widget? child) {
-        // 获取当前 MediaQuery 数据,限制字体大小
-        final mediaQueryData = MediaQuery.of(context);
-        final newMediaQueryData = mediaQueryData.copyWith(textScaleFactor: 1.0);
-        return MediaQuery(
-          data: newMediaQueryData,
-          child: child!,
-        );
+      home: FutureBuilder<String?>(
+        future: LocalStorage.getDefaultAccount(),
+        builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data != null) {
+              final aidAndServerName = snapshot.data!.split(':');
+              final aid = aidAndServerName[0];
+              final serverName = ServerName.values
+                  .firstWhere((element) => element.name == aidAndServerName[2]);
+              return MyHomePage(
+                  initialIndex: 0, aid: aid, serverName: serverName);
+            } else {
+              return const UserInputPage();
+            }
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+      routes: {
+        '/userInput': (context) => const UserInputPage(),
+        '/userDataList': (context) => UserDataListPage(
+            serverName:
+                ModalRoute.of(context)!.settings.arguments as ServerName,
+            userName: ModalRoute.of(context)!.settings.arguments as String),
+        '/home': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments
+              as Map<String, dynamic>;
+          final aid = args['aid'] as String;
+          final serverName = args['serverName'] as ServerName;
+          return MyHomePage(initialIndex: 0, aid: aid, serverName: serverName);
+        },
+        '/accountList': (context) => const AccountListPage(),
       },
     );
   }

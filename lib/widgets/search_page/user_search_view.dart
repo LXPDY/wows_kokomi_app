@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wows_kokomi_app/common/user_global.dart';
 import 'package:wows_kokomi_app/models/server_name.dart';
 import 'package:wows_kokomi_app/widgets/search_page/user_search_list_view.dart';
 
@@ -13,10 +14,33 @@ class _UserInputPageState extends State<UserInputPage> {
   ServerName? _selectedServerName;
   final TextEditingController _userNameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  List<String> searchHistory = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadSearchHistory();
+  }
+
   @override
   void dispose() {
     _userNameController.dispose();
     super.dispose();
+  }
+
+  Future<void> loadSearchHistory() async {
+    searchHistory = await LocalStorage.getSearchHistory();
+    setState(() {});
+  }
+
+  Future<void> addToSearchHistory(String userName) async {
+    await LocalStorage.addSearchHistory(userName);
+    loadSearchHistory();
+  }
+
+  Future<void> removeFromSearchHistory(String userName) async {
+    await LocalStorage.removeSearchHistory(userName);
+    loadSearchHistory();
   }
 
   @override
@@ -35,11 +59,42 @@ class _UserInputPageState extends State<UserInputPage> {
                 TextFormField(
                   style: const TextStyle(fontSize: 18),
                   controller: _userNameController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: ' 用户名',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 12),
-                    border: OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 12),
+                    border: const OutlineInputBorder(),
+                    suffixIcon: PopupMenuButton<String>(
+                      icon: const Icon(Icons.arrow_drop_down),
+                      itemBuilder: (BuildContext context) {
+                        return searchHistory
+                            .map<PopupMenuItem<String>>((String value) {
+                          return PopupMenuItem<String>(
+                            value: value,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(value),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    removeFromSearchHistory(value);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList();
+                      },
+                      onSelected: (String? newValue) {
+                        if (newValue != null) {
+                          setState(() {
+                            _userNameController.text = newValue;
+                          });
+                        }
+                      },
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -88,7 +143,7 @@ class _UserInputPageState extends State<UserInputPage> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           if (_selectedServerName != null) {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => UserDataListPage(
@@ -97,6 +152,7 @@ class _UserInputPageState extends State<UserInputPage> {
                                 ),
                               ),
                             );
+                            addToSearchHistory(_userNameController.text);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(

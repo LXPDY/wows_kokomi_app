@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wows_kokomi_app/widgets/darwer_page/app_contributer.dart';
 import 'package:wows_kokomi_app/widgets/search_page/user_search_view.dart';
 
-
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
@@ -17,7 +16,7 @@ class AppDrawer extends StatelessWidget {
               color: Colors.blue,
             ),
             child: Text(
-              'TODO:玩家信息',
+              'WOWS KOKOMI',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -29,10 +28,29 @@ class AppDrawer extends StatelessWidget {
             title: const Text('搜索玩家'),
             onTap: () {
               // 跳转到搜索界面的操作
-              Navigator.push(
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const UserInputPage()),
+                (route) {
+                  // 保留类型为 UserInputPage 的页面，删除其他类型为 UserInputPage 的页面
+                  if (route.settings.name == '/') {
+                    return true;
+                  }
+                  if (route.settings.name == '/userInput') {
+                    return true;
+                  }
+                  return !route.hashCode.runtimeType
+                      .toString()
+                      .contains('UserInputPage');
+                },
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.list),
+            title: const Text('账户列表'),
+            onTap: () {
+              Navigator.pushNamed(context, '/accountList');
             },
           ),
           ListTile(
