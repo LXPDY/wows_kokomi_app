@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'package:wows_kokomi_app/common/app_http_tool.dart';
 import 'package:wows_kokomi_app/common/user_global.dart';
 import 'package:wows_kokomi_app/models/error_model.dart';
-import 'package:wows_kokomi_app/models/server_name.dart';
+import 'package:wows_kokomi_app/models/enum_name.dart';
 
 class UserInfo {
   ServerName? serverName;

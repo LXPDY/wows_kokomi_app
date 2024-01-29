@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wows_kokomi_app/models/error_model.dart';
-import 'package:wows_kokomi_app/models/server_name.dart';
+import 'package:wows_kokomi_app/models/enum_name.dart';
 import 'package:wows_kokomi_app/widgets/app_sys_page/error_widget.dart';
 import 'package:wows_kokomi_app/widgets/darwer_page/app_darwer.dart';
 import 'package:wows_kokomi_app/widgets/main_page/app_recent_page.dart';
@@ -22,7 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static final List<Widget> _pages = <Widget>[
     UserInfoPage(aid: '2023619512', serverName: ServerName.asia),
     const RecentPage(),
-    const ShipListPage(),
+    const ShipListPage(aid: '2023619512', serverName: ServerName.asia),
     const ToolsPage(),
   ];
 
@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _selectedIndex = widget.initialIndex;
     _pages[0] = UserInfoPage(aid: widget.aid, serverName: widget.serverName);
+     _pages[2] = ShipListPage(aid: widget.aid, serverName: widget.serverName);
   }
 
   @override

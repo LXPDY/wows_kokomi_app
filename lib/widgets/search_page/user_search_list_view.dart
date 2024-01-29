@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wows_kokomi_app/common/user_global.dart';
 import 'package:wows_kokomi_app/models/error_model.dart';
-import 'package:wows_kokomi_app/models/server_name.dart';
+import 'package:wows_kokomi_app/models/enum_name.dart';
 import 'package:wows_kokomi_app/models/user_seach_model.dart';
 import 'package:wows_kokomi_app/widgets/app_sys_page/error_widget.dart';
 import 'package:wows_kokomi_app/widgets/main_page/app_home_page.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wows_kokomi_app/common/user_global.dart';
-import 'package:wows_kokomi_app/models/server_name.dart';
+import 'package:wows_kokomi_app/models/enum_name.dart';
 import 'package:wows_kokomi_app/widgets/search_page/user_search_list_view.dart';
 
 class UserInputPage extends StatefulWidget {

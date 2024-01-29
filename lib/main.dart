@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wows_kokomi_app/common/user_global.dart';
-import 'package:wows_kokomi_app/models/server_name.dart';
+import 'package:wows_kokomi_app/models/enum_name.dart';
 import 'package:wows_kokomi_app/widgets/darwer_page/app_account_page.dart';
 import 'package:wows_kokomi_app/widgets/main_page/app_home_page.dart';
 import 'package:wows_kokomi_app/widgets/search_page/user_search_list_view.dart';
 import 'package:wows_kokomi_app/widgets/search_page/user_search_view.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class AppTheme {

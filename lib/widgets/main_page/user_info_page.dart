@@ -5,7 +5,7 @@ import 'package:wows_kokomi_app/common/color_tool.dart';
 import 'package:wows_kokomi_app/common/user_global.dart';
 import 'package:wows_kokomi_app/models/auto_size_model.dart';
 import 'package:wows_kokomi_app/models/error_model.dart';
-import 'package:wows_kokomi_app/models/server_name.dart';
+import 'package:wows_kokomi_app/models/enum_name.dart';
 import 'package:wows_kokomi_app/models/user_model.dart';
 import 'package:wows_kokomi_app/widgets/app_sys_page/error_widget.dart';
 
@@ -63,6 +63,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
     final size3 = defaultFront * 0.5;
     final size4 = defaultFront * 0.25;
     final size5 = defaultFront * 0.6;
+    final size6 = defaultFront * 0.9;
     return Scaffold(
       body: FutureBuilder<void>(
           future: _refreshData,
@@ -73,13 +74,11 @@ class _UserInfoPageState extends State<UserInfoPage> {
               if (widget.userInfo.userInfoModel != null) {
                 return SingleChildScrollView(
                   child: Column(
-                    
                     children: [
                       Container(
-                        
                         padding: const EdgeInsets.all(16),
                         child: Column(
-                           crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RichText(
                               text: TextSpan(
@@ -148,8 +147,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                                 ])),
                                 Container(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: defaultFront / 2,
-                                      vertical: defaultFront / 4),
+                                      horizontal: size3, vertical: size4),
                                   decoration: BoxDecoration(
                                     color: Colors.grey[300],
                                     borderRadius: BorderRadius.circular(8),
@@ -163,8 +161,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                             ),
                             SizedBox(height: size3),
                             Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: defaultFront / 2),
+                              padding: EdgeInsets.symmetric(vertical: size3),
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: colorFromStr(widget
@@ -247,42 +244,533 @@ class _UserInfoPageState extends State<UserInfoPage> {
                             ),
                             SizedBox(height: size3),
                             Container(
-                              padding: const EdgeInsets.all(16),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('TODO:详细战绩'),
-                                  SizedBox(height: size3),
-                                  // 在此处添加其他布局内容
-                                ],
+                              padding: const EdgeInsets.all(0),
+                              child: Card(
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('详细数据',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: defaultFront)),
+                                      const Divider(),
+                                      ListTile(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 8.0, horizontal: 0.0),
+                                        leading: Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                          ),
+                                          child: const Icon(Icons.person,
+                                              color: Colors.white, size: 24),
+                                        ),
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('单野',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: defaultFront)),
+                                            Text(
+                                                '${strFromePR(widget.userInfo.userInfoModel!.data.battleType.pvpSolo.avgPr)} (+${widget.userInfo.userInfoModel!.data.battleType.pvpSolo.avgPrDis})',
+                                                style: TextStyle(
+                                                    color: colorFromStr(widget
+                                                        .userInfo
+                                                        .userInfoModel!
+                                                        .data
+                                                        .battleType
+                                                        .pvpSolo
+                                                        .avgPrColor),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: size5)),
+                                          ],
+                                        ),
+                                        trailing: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                                '${widget.userInfo.userInfoModel!.data.battleType.pvpSolo.battlesCount} 场',
+                                                style:
+                                                    TextStyle(fontSize: size6)),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpSolo.winRate}%',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpSolo
+                                                                .winRateColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' | ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpSolo.avgDamage}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpSolo
+                                                                .avgDamageColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' | ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpSolo.avgFrags}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpSolo
+                                                                .avgFragsColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      ListTile(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 8.0, horizontal: 0.0),
+                                        leading: Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                          ),
+                                          child: const Icon(Icons.group,
+                                              color: Colors.white, size: 24),
+                                        ),
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('自行车',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: defaultFront)),
+                                            Text(
+                                                '${strFromePR(widget.userInfo.userInfoModel!.data.battleType.pvpDiv2.avgPr)} (+${widget.userInfo.userInfoModel!.data.battleType.pvpDiv2.avgPrDis})',
+                                                style: TextStyle(
+                                                    color: colorFromStr(widget
+                                                        .userInfo
+                                                        .userInfoModel!
+                                                        .data
+                                                        .battleType
+                                                        .pvpDiv2
+                                                        .avgPrColor),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: size5)),
+                                          ],
+                                        ),
+                                        trailing: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                                '${widget.userInfo.userInfoModel!.data.battleType.pvpDiv2.battlesCount} 场',
+                                                style:
+                                                    TextStyle(fontSize: size6)),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpDiv2.winRate}%',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpDiv2
+                                                                .winRateColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' | ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpDiv2.avgDamage}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpDiv2
+                                                                .avgDamageColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' | ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpDiv2.avgFrags}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpDiv2
+                                                                .avgFragsColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      ListTile(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 8.0, horizontal: 0.0),
+                                        leading: Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                          ),
+                                          child: const Icon(Icons.groups,
+                                              color: Colors.white, size: 24),
+                                        ),
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('三轮车',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: defaultFront)),
+                                            Text(
+                                                '${strFromePR(widget.userInfo.userInfoModel!.data.battleType.pvpDiv3.avgPr)} (+${widget.userInfo.userInfoModel!.data.battleType.pvpDiv3.avgPrDis})',
+                                                style: TextStyle(
+                                                    color: colorFromStr(widget
+                                                        .userInfo
+                                                        .userInfoModel!
+                                                        .data
+                                                        .battleType
+                                                        .pvpDiv3
+                                                        .avgPrColor),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: size5)),
+                                          ],
+                                        ),
+                                        trailing: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                                '${widget.userInfo.userInfoModel!.data.battleType.pvpDiv3.battlesCount} 场',
+                                                style:
+                                                    TextStyle(fontSize: size6)),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpDiv3.winRate}%',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpDiv3
+                                                                .winRateColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' | ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpDiv3.avgDamage}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpDiv3
+                                                                .avgDamageColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' | ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.pvpDiv3.avgFrags}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .pvpDiv3
+                                                                .avgFragsColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      ListTile(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 8.0, horizontal: 0.0),
+                                        leading: Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                          ),
+                                          child: const Icon(Icons.perm_identity_sharp,
+                                              color: Colors.white, size: 24),
+                                        ),
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('排位',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: defaultFront)),
+                                            Text(
+                                                '${strFromePR(widget.userInfo.userInfoModel!.data.battleType.rankSolo.avgPr)} (+${widget.userInfo.userInfoModel!.data.battleType.rankSolo.avgPrDis})',
+                                                style: TextStyle(
+                                                    color: colorFromStr(widget
+                                                        .userInfo
+                                                        .userInfoModel!
+                                                        .data
+                                                        .battleType
+                                                        .rankSolo
+                                                        .avgPrColor),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: size5)),
+                                          ],
+                                        ),
+                                        trailing: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                                '${widget.userInfo.userInfoModel!.data.battleType.rankSolo.battlesCount} 场',
+                                                style:
+                                                    TextStyle(fontSize: size6)),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.rankSolo.winRate}%',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .rankSolo
+                                                                .winRateColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' | ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.rankSolo.avgDamage}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .rankSolo
+                                                                .avgDamageColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' | ',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: size5),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${widget.userInfo.userInfoModel!.data.battleType.rankSolo.avgFrags}',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: colorFromStr(
+                                                            widget
+                                                                .userInfo
+                                                                .userInfoModel!
+                                                                .data
+                                                                .battleType
+                                                                .rankSolo
+                                                                .avgFragsColor),
+                                                        fontSize: size5),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
-                          
                           ],
                         ),
-                        
                       ),
                       Column(
-                              
-                              children: [
-                                Text(
-                                  '最高记录',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: defaultFront),
-                                ),
-                              ],
-                            ),
+                        children: [
+                          Text(
+                            'TODO:最高记录',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: defaultFront),
+                          ),
+                          FutureBuilder<Image>(
+                            future: LocalStorage.getImage('http://www.wows-coral.com/ship_icons/PASA002.png'),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<Image> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return snapshot.data ?? const SizedBox();
+                              } else if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.error != null) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return const Text('Unknown error');
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                       if (!isDefaultAccount)
                         ElevatedButton(
                           onPressed: () async {
                             await LocalStorage.bindDefaultAccount(
-                                widget.aid,widget.userInfo.userInfoModel!.data.nickname, widget.serverName);
+                                widget.aid,
+                                widget.userInfo.userInfoModel!.data.nickname,
+                                widget.serverName);
                             setState(() {
                               isDefaultAccount = true;
                             });
@@ -290,7 +778,6 @@ class _UserInfoPageState extends State<UserInfoPage> {
                           child: const Text('绑定账号'),
                         ),
                     ],
-                    
                   ),
                 );
               } else {
